@@ -1,0 +1,368 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<link rel="apple-touch-icon" sizes="76x76" href="admin_files/assets/img/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="admin_files/assets/img/favicon.png">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<title>Go Go Taxi</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Bootstrap core CSS     -->
+	<link href="admin_files/assets/css/bootstrap.min.css" rel="stylesheet"/>
+	<!--  Paper Dashboard core CSS    -->
+	<link href="admin_files/assets/css/paper-dashboard.css?v=1.2.1" rel="stylesheet"/>
+	<!--  CSS for Demo Purpose, don't include it in your project     -->
+	<link href="admin_files/assets/css/demo.css" rel="stylesheet"/>
+	<!--  Fonts and icons     -->
+	<link href="admin_files/assets/css/font-awesome.min.css" rel="stylesheet">
+	<link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet'
+		  type='text/css'>
+	<link href="admin_files/assets/css/themify-icons.css" rel="stylesheet">
+</head>
+<body>
+<div class="wrapper ">
+	<div class="main-panel" style="width:100%">
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="manage_ticket.html" class="btn-rotate">
+								<i class="ti-home"></i>
+								List of Tickets
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="content">
+			<div class="container-fluid">
+				<div class="col-md-12">
+					<div class="card card-user">
+						<div class="card-header">
+							<h4 class="card-title">Ticket Detail</h4>
+						</div>
+						<div class="card-content" style="min-height: 0px;">
+							<div class="row">
+								<div class="col-md-4 col-md-offset-1">
+									<h5>Name & Email<br/>
+										<small class="name_email"></small>
+									</h5>
+								</div>
+								<div class="col-md-3">
+									<h5>Category<br/>
+										<small class="categoryName"></small>
+									</h5>
+								</div>
+								<div class="col-md-3">
+									<h5>Status<br/>
+										<small class="status"></small>
+									</h5>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12 col-md-offset-1 subject"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card card-timeline card-plain">
+							<div class="card-header">
+								<h4 class="card-title">Ticket Reply</h4>
+							</div>
+							<div class="card-content">
+
+								<ul class="timeline" id="timeline"></ul>
+
+								<ul class="timeline">
+									<li class="timeline-inverted">
+										<div class="timeline-badge danger">
+											<i class="ti-pencil-alt"></i>
+										</div>
+										<div class="timeline-panel">
+											<div class="timeline-heading">
+												<span class="label label-danger">Ticket Created</span>
+											</div>
+											<div class="timeline-body">
+												<p class="first_content"></p>
+												<p class="file_url"></p>
+											</div>
+											<h6>
+												<i class="ti-time"></i>
+												<span class="created_time"></span>
+											</h6>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12 new_post_form">
+						<div class="card card-timeline card-user">
+							<div class="card-header">
+								<h4 class="card-title">Send Reply</h4>
+							</div>
+							<div class="card-content">
+								<form id="new_post_form">
+									<div class="card card-plain">
+										<div class="content">
+											<div class="form-group">
+												<textarea class="form-control" required="" rows="10"
+														  name="content" id="content"
+														  placeholder="Issue..."></textarea>
+											</div>
+										</div>
+										<div class="footer text-center">
+											<button type="submit"
+													class="btn btn-fill btn-danger btn-wd"><i
+													class="ti-back-right"></i> Reply
+											</button>
+											<!--
+											<button type="button"
+													class="btn btn-fill btn-success btn-wd ticket_close">
+												<i class="ti-lock"></i> Ticket Close
+											</button>
+											-->
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="footer">
+			<div class="container-fluid">
+				<div class="copyright pull-right">
+					&copy;
+					<script>document.write(new Date().getFullYear())</script>
+					, made with <i class="fa fa-heart heart"></i> by LINE-TAXI
+				</div>
+			</div>
+		</footer>
+	</div>
+</div>
+<!--   Core JS Files. Extra: TouchPunch for touch library inside jquery-ui.min.js   -->
+<script src="admin_files/assets/js/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script src="admin_files/assets/js/jquery-ui.min.js" type="text/javascript"></script>
+<script src="admin_files/assets/js/perfect-scrollbar.min.js" type="text/javascript"></script>
+<script src="admin_files/assets/js/bootstrap.min.js" type="text/javascript"></script>
+<!--  Forms Validations Plugin -->
+<script src="admin_files/assets/js/jquery.validate.min.js"></script>
+<!-- Promise Library for SweetAlert2 working on IE -->
+<script src="admin_files/assets/js/es6-promise-auto.min.js"></script>
+<!--  Plugin for Date Time Picker and Full Calendar Plugin-->
+<script src="admin_files/assets/js/moment.min.js"></script>
+<!--  Date Time Picker Plugin is included in this js file -->
+<script src="admin_files/assets/js/bootstrap-datetimepicker.js"></script>
+<!--  Select Picker Plugin -->
+<script src="admin_files/assets/js/bootstrap-selectpicker.js"></script>
+<!--  Switch and Tags Input Plugins -->
+<script src="admin_files/assets/js/bootstrap-switch-tags.js"></script>
+<!-- Circle Percentage-chart -->
+<script src="admin_files/assets/js/jquery.easypiechart.min.js"></script>
+<!--  Charts Plugin -->
+<script src="admin_files/assets/js/chartist.min.js"></script>
+<!--  Notifications Plugin    -->
+<script src="admin_files/assets/js/bootstrap-notify.js"></script>
+<!-- Sweet Alert 2 plugin -->
+<script src="admin_files/assets/js/sweetalert2.js"></script>
+<!--  Bootstrap Table Plugin    -->
+<script src="admin_files/assets/js/bootstrap-table.js"></script>
+<!--  Plugin for DataTables.net  -->
+<script src="admin_files/assets/js/jquery.datatables.js"></script>
+<!-- Paper Dashboard PRO Core javascript and methods for Demo purpose -->
+<script src="admin_files/assets/js/paper-dashboard.js?v=1.2.1"></script>
+<!-- Paper Dashboard PRO DEMO methods, don't include it in your project! -->
+<script src="admin_files/assets/js/demo.js"></script>
+<script src="js/firebase_core.js"></script>
+<script src="js/firebase.js"></script>
+<script type="text/javascript">
+
+	$(document).ready(function () {
+
+    	firebase.auth().onAuthStateChanged(function (user) {
+        	if (user) {
+            	// alert('yes');
+            } else {
+            	window.location = "login.html";
+            }
+        });
+
+        fetchingNotify('top', 'right');
+        var ticket_number = getParameterByName('id');
+
+        firebase.database().ref('/ticket/' + ticket_number).on('value', function (snapshot) {
+
+        	if (snapshot.val() === null) {
+         
+            	window.location = "manage_ticket.html";
+            } else {
+
+            	// 清除timeline
+			   	$("#timeline").empty();
+
+                $(".first_content").html(snapshot.val().content);
+                $(".created_time").html(snapshot.val().createdDate);
+                $(".name_email").html(snapshot.val().name + ' - ' + snapshot.val().email);
+                $(".categoryName").html(snapshot.val().categoryName);
+                $(".status").html(snapshot.val().status);
+                if (snapshot.val().status == "Close") {
+                	$(".new_post_form").hide();
+                }
+                $(".subject").html('Subject - ' + snapshot.val().subject);
+                if (snapshot.val().ticketpostImage == '') {
+                	$(".file_url").html('<p>No Attachment </p>');
+                } else {
+                	$(".file_url").html('<p>Attachment Link :- <a target="_blank" href="' + snapshot.val().ticketpostImage + '" style="z-index: 10;">Click Here</a></p>');
+                }
+
+
+
+                //$.each(snapshot.val(), function (idx, obj) {
+                var newObject = reverseObject(snapshot.val());
+                $.each(newObject, function (idx, obj) {
+
+                	if (typeof obj === 'object') {
+
+                    	if (obj['who'] === 'agent' || obj['who'] === 'driver') {
+
+							var posterName = "";
+							if(obj['who'] === 'agent')			posterName = "管理員";
+							else if(obj['who'] === 'driver')	posterName = "司機：" + snapshot.val().driverName;
+
+                            	var html = '';
+                            	html += '<li>';
+                            	html += 	'<div class="timeline-badge success">';
+                            	html += 		'<i class="ti-share-alt"></i>';
+                            	html += 	'</div>';
+                            	html += 	'<div class="timeline-panel">';
+                            	html += 		'<div class="timeline-heading">';
+                            	html += 			`<span class="label label-success">${posterName}</span>`;
+                            	html += 		'</div>';
+                            	html += 		'<div class="timeline-body">';
+                            	html += 			'<p>' + obj['content'] + '</p>';
+                            	html += 		'</div>';
+                            	html += 		'<h6><i class="ti-time"></i><span>' + obj['reply_date'] + '</span></h6>';
+                            	html += 	'</div>';
+                            	html += '</li>';
+                                $("#timeline").append(html);
+
+         				} else if (obj['who'] == 'passenger') {
+
+                        	var html = '';
+                        	html += '<li class="timeline-inverted">';
+                        	html += 	'<div class="timeline-badge info">';
+                        	html += 		'<i class="ti-share"></i>';
+                        	html += 	'</div>';
+                        	html += 	'<div class="timeline-panel">';
+                        	html += 		'<div class="timeline-heading">';
+                        	html += 			`<span class="label label-info">乘客：${snapshot.val().name}</span>`;
+                        	html += 		'</div>';
+                        	html += 		'<div class="timeline-body">';
+                        	html += 			'<p>' + obj['content'] + '</p>';
+                        	html += 		'</div>';
+                        	html += 		'<h6><i class="ti-time"></i><span>' + obj['reply_date'] + '</span></h6>';
+                        	html += 	'</div>';
+                        	html += '</li>';
+                            $("#timeline").append(html);
+                        }
+                    }
+                });
+            }
+        });
+
+        function getParameterByName(name, url) {
+
+        	if (!url)	url = window.location.href;
+
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                         results = regex.exec(url);
+
+            if (!results)	return null;
+
+            if (!results[2])	return '';
+
+           	return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        $('#new_post_form').validate();
+        $(".ticket_close").click(function (e) {
+
+        	swal({
+            	title: 'Close Ticket',
+                html: 'Are you sure ?',
+                showCancelButton: true,
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false
+            }).then(function (result) {
+
+            	var updates = {};
+                var ticket_number = getParameterByName('id');
+         
+                updates['/ticket/' + ticket_number + '/status'] = 'Close';
+         
+                firebase.database().ref().update(updates);
+
+                var d = new Date();
+                var current_datetime = d.toLocaleString();
+
+                var newPostKey = firebase.database().ref().child('ticket/' + ticket_number).push().key;
+                var updates2 = {};
+
+                updates2['/ticket/' + ticket_number + '/' + newPostKey] = {who: 'agent', content: 'Ticket Close', reply_date: current_datetime};
+         		firebase.database().ref().update(updates2);
+
+                swal({
+                	type: 'success',
+                    html: 'This Ticket is close',
+                    confirmButtonClass: 'btn btn-success',
+                    buttonsStyling: false
+         		})
+            }).catch(swal.noop)
+        });
+
+        $("#new_post_form").submit(function (e) {
+         
+        	e.preventDefault();
+            if ($('#new_post_form').valid()) {
+         
+            	var content = $("#content").val();
+            	$("#content").val("");
+
+                var ticket_number = getParameterByName('id');
+         
+                var d = new Date();
+                var current_datetime = d.toLocaleString();
+
+                var updates = {};
+                updates['/ticket/' + ticket_number + '/' + d] = {who: 'agent', content: content, reply_date: current_datetime};
+         		firebase.database().ref().update(updates);
+         	}
+        });
+    });
+
+	function reverseObject(object) {
+		var newObject = {};
+		var keys = [];
+
+		for (var key in object) {
+			keys.push(key);
+		}
+
+		for (var i = keys.length - 1; i >= 0; i--) {
+			var value = object[keys[i]];
+			newObject[keys[i]]= value;
+		}
+
+		return newObject;
+	}
+</script>
+</body>
+</html>

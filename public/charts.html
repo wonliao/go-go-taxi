@@ -1,0 +1,43 @@
+﻿<html>
+<head>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <script type="text/javascript">
+google.charts.load("current", {packages:['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+function drawChart() {
+
+
+    var dailyData = [
+      ['Element', 'Density', { role: 'style' }],
+      ['8/11', 1000, '#b87333', ],
+      ['8/12', 2000, 'silver'],
+      ['8/13', 500, 'gold'],
+      ['8/14', 1400, 'color: #e5e4e2' ]
+    ];
+
+  dailyData.push(['8/15', 900, 'color: #e5e4e2' ]);
+
+  var data = google.visualization.arrayToDataTable(dailyData);
+
+  var options = {
+    title: "本週收入",
+    bar: {groupWidth: '95%'},
+    legend: 'none',
+  };
+
+  var chart_div = document.getElementById('chart_div');
+  var chart = new google.visualization.ColumnChart(chart_div);
+
+  // Wait for the chart to finish drawing before calling the getImageURI() method.
+  // google.visualization.events.addListener(chart, 'ready', function () {
+  //   chart_div.innerHTML = '<img src="' + chart.getImageURI() + '">';
+  //   console.log(chart_div.innerHTML);
+  // });
+
+  chart.draw(data, options);
+
+}
+  </script>
+
+<div id='chart_div'></div>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=1">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+  </head>
+  <body>
+
+    <div id="myContent">
+
+      <video id="friendsVideo" class="friendsVideo" autoplay playsinline></video>
+
+      <video id="yourVideo" class="yourVideo" autoplay muted playsinline></video>
+
+      <button onclick="showFriendsFace()" type="button" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-facetime-video" aria-hidden="true"></span> Call</button>
+
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+    <!--
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
+    -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!--
+      <script src="js/script.js"></script>
+    -->
+
+    <script>
+
+  function isIOS() {
+
+    var iDevices = [
+      'iPad Simulator',
+      'iPhone Simulator',
+      'iPod Simulator',
+      'iPad',
+      'iPhone',
+      'iPod'
+    ];
+
+    if (!!navigator.platform) {
+      while (iDevices.length) {
+        if (navigator.platform === iDevices.pop()){ return true; }
+      }
+    }
+
+    return false;
+  }
+
+var ua = navigator.userAgent.toLowerCase();
+var isIOS = isIOS();
+if(isIOS == true) {
+
+  if (ua.indexOf('safari') > -1) {
+
+    if (ua.indexOf('line') > -1) {
+
+       swal("需要 Safari 瀏覽器", "請點擊右上角按鈕 -> 使用Safari瀏覽", {buttons: false, closeOnClickOutside: false });
+
+       $("#myContent").hide();
+    }
+  } else {
+
+    swal("需要 Safari 瀏覽器", "請點擊右上角按鈕 -> 使用Safari瀏覽", {buttons: false, closeOnClickOutside: false });
+
+    $("#myContent").hide();
+  }
+} else {
+
+  if (ua.indexOf('line') > -1) {
+
+    swal("需要 Chrome 瀏覽器", "請點擊右上角按鈕 -> 以其他應用程式開啟", {buttons: false, closeOnClickOutside: false });
+
+    $("#myContent").hide();
+  }
+}
+
+$( document ).ready(function() {
+
+    console.log( "ready!" );
+
+    var ticketID = getParameterByName('ticketID');
+    console.log("ticketID("+ticketID+")");
+
+    if(ticketID == null) {
+      swal("任務ID錯誤!", {buttons: false, closeOnClickOutside: false });
+      $("#myContent").hide();
+      return;
+    }
+
+    $.getScript( "js/script.js", function() {
+
+        showMyFace();
+    });
+
+
+});
+
+function getParameterByName(name, url) {
+
+    if (!url)	url = window.location.href;
+
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            	results = regex.exec(url);
+
+    if (!results)	return null;
+
+    if (!results[2])	return '';
+
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+
+    </script>
+  </body>
+</html>

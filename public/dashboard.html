@@ -1,0 +1,105 @@
+﻿<!doctype html>
+<html lang="en">
+<head></head>
+<script src="admin_files/assets/js/jquery-3.1.1.min.js" type="text/javascript"></script>
+<script src="js/header.js"></script>
+<body style="display:none">
+<div class="wrapper">
+     <div class="sidebar" data-background-color="brown" data-active-color="danger"></div>
+     <div class="main-panel">
+        <nav id="navbar" class="navbar navbar-default"></nav>
+
+            <div class="content">
+               <div class="container-fluid">
+                  <div class="row">
+                     <div class="col-md-12">
+                        <div class="card ">
+                           <div class="card-header">
+                              <h4 class="card-title">Tickets Status</h4>
+                           </div>
+                           <div class="card-content">
+                              <div class="row">
+                                 <div class="col-md-5">
+                                    <div class="table-responsive">
+                                       <table class="table">
+                                          <tbody>
+                                             <tr>
+                                                <td>Total Open Tickets</td>
+                                                <td class="text-right open_ticket"> </td>
+                                             </tr>
+                                             <tr>
+                                                <td>Total Close Tickets</td>
+                                                <td class="text-right close_ticket"> </td>
+                                             </tr>
+                                          </tbody>
+                                       </table>
+                                    </div>
+                                 </div>
+                                 <div class="col-md-6" id="ticket_chart" style="width: 50%;height: 500px">
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+        <footer class="footer"></footer>
+     </div>
+</div>
+<script type="text/javascript">
+
+callFunctionFromScript("Dashboard");
+checkAccount();
+
+$(document).ready(function () {
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            $(".agent_email").html(user.email);
+        } else {
+            window.location = "login.html";
+        }
+    });
+    fetchingNotify('top', 'right');
+    var open_ticket=0;
+    var close_ticket=0;
+
+
+   var query = firebase.database().ref("ticket").orderByKey();
+   query.once("value")
+   .then(function(snapshot) {
+
+   snapshot.forEach(function(childSnapshot) {
+
+      if(childSnapshot.val().status!='Close'){open_ticket++;}
+      else                                   {close_ticket++;}
+
+   });
+
+   $(".close_ticket").html(close_ticket);
+   $(".open_ticket").html(open_ticket);
+   google.charts.load('current', {'packages':['corechart']});
+   google.charts.setOnLoadCallback(drawChart);
+});
+   function drawChart() {
+
+      var data = google.visualization.arrayToDataTable([
+         ['Status', 'Count'],
+         ['Open',     open_ticket],
+         ['Close',      close_ticket]
+      ]);
+
+      var options = {
+         title: 'Ticket Status'
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('ticket_chart'));
+
+      chart.draw(data, options);
+   }
+
+});
+</script>
+</body>
+</html>
